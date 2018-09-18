@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Customer page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/tab.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script type="text/javascript" src="/static/angular.min.js" th:src="@{/angular.min.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+	<script type="text/javascript">"src/main/resources/static/app/pnpStoreApp.js"</script>  
+    <script type="text/javascript" src="./static/app/app.module.js" th:src="@{/app/app.module.js}"></script>
+    <script type="text/javascript" src="./static/app/pnpStoreApp.js" th:src="@{/app/pnpStoreApp.js}"></script>
+    
+<!-- modal with a button -->
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body  ng-app="pnpStoreApp"  ng-controller="pnpStoreAppController" >
+
+	<div>
+	 <img th:src="@{/images/logo.jpg}"  width="200" height="70" alt="logo" /> 
+	</div>
+				<div  style="margin-top:15px; background-color: #CF000F;color: #E4F1FE;">
+					<h4 align="center">Your Cart contains the following items: </h4>					
+				</div>
+					
+		<div>
+		<table class="table table-bordered" style="width: 600px;" align="center">
+					<th></th>
+					<th>Product name</th>
+					<th>Price</th>
+					<th>Quantity</th>
+		
+			<tr ng-repeat="carts in cart">
+                   <td> <span><img  src="{{ carts.product_img }}" width="100" height="100"> </span></span></td>
+                   <td>{{carts.product_name}}</td>
+                   <td> R{{carts.cart_price}}</td>
+                   <td>{{carts.cart_quantity}}</td>
+                   <td><a ng-click="DeleteItem(carts)" class="btn btn-danger btn-sm">Delete item</a></td>
+                   </tr>
+				   <tr>
+				   <td colspan="4" align="right"><b><i>TOTAL PAYABLE IS</i></b> R{{totalAmount}} </td>
+				   
+				   			</tr>	
+							</table>				
+				  <div class="container" style="margin-left: 43%">  
+ 			 				<!-- Trigger the modal with a button -->
+ 			 				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Checkout Cart</button>
+							<!-- Modal -->
+  							<div class="modal fade" id="myModal2" role="dialog">
+    						<div class="modal-dialog">
+    
+      						<!-- Modal content-->
+      						<div class="modal-content">
+        					<div class="modal-header">
+         					<button type="button" class="close" data-dismiss="modal">&times;</button>
+          					<h4 class="modal-title">Please provide your banking details</h4>
+        					</div>
+        					<div class="modal-body">
+        					<form name="payment">
+        					<p><b>Your cart balance payable is:</b> R{{totalAmount}}</p>
+         					<h5><b></>Select your bank:</b></h5>
+         					<select ng-model="banks" ng-required="true">
+         					<option value="" selected"">---------</option>       					         					
+         					<option value="Absa" >Absa</option>
+         					<option value="std">Standard Bank</option>
+         					<option value="fnb">FNB</option>
+         					<option value="capitac">Capitac</option>
+         					<option value="nedbank">Nedbank</option>
+         					</select>
+         					<h5><b></>Card type:</b></h5>
+         					<select ng-model="type">
+         					<option value="" selected"">---------</option>        					         					         					
+         					<option value="credit">Credit</option>
+         					<option value="debit">Debit</option>         					
+         					</select>
+         					<h5><b></>Enter card No.:</b></h5>
+         					<input type="number" ng-model="cardNo" placeholder="must be 16 digits" ng-required="true"></input> 
+        					</div>
+        					<div class="modal-footer">
+          					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          					<a ng-click="validatePay('banks,type,cardNo')" class="btn btn-default" data-toggle="modal">Done</a>
+        					</form>
+        					</div></div></div></div></div><br/>
+        					
+        			<form th:action="@{/pnpStore/client}" method="get">
+				<button class="btn btn-primary" name="logout"
+				type="Submit"  style="position: sticky;left: 550px; bottom: 200px;">Or continue shopping</button>
+				</form>				
+				</div>	
+				
+					
+				
+				<div class="container" style="margin-left: 43%">  
+ 			 				<!-- Modal -->
+  							<div class="modal fade" id="myModal" role="dialog">
+    						<div class="modal-dialog">
+    
+      						<!-- Order Modal-->
+      						<div class="modal-content">
+        					<div class="modal-header">
+         					<button type="button" class="close" data-dismiss="modal">&times;</button>
+          					<h4 class="modal-title">Order details:</h4>
+        					</div>
+        					<div class="modal-body">
+        					<h4><b></>Please provide us the following details</b></h4>
+         					<h5><b></>Enter contact number:</b></h5>
+         					<input type="number" ng-model="contactNo" placeholder="must be 10 digits"></input> 
+         					<h5><b></>Enter your Address:</b></h5>
+         					<input type="text" ng-model="address" placeholder="physical address"></input>
+         					<h5><b></>Location:</b></h5>
+         					<select ng-model="location">
+         					<option value="" selected"">---------</option>        					         					         					
+         					<option value="Pretoria">Pretoria</option>
+         					<option value="Johannesburg">Johannesburg CBD</option> 
+         					<option value="Midrand">Midrand</option> 
+         					<option value="Soweto">Soweto</option>
+         					<option value="Sandton">Sandton</option>
+         					<option value="Alexandria">Alexandria</option>         					
+         					</select>
+        					</div>
+        					<div class="modal-footer">
+          					<a ng-click="Cancel()" class="btn btn-default">Cancel</a>
+          					<a ng-click="order('contactNo,address,location')" class="btn btn-default">Done</a>
+        					</form>
+        					</div></div></div></div></div>      					
+        					
+					
+				
+</body>
+</html>

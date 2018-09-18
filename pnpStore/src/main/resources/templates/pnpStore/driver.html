@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>driver page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/tab.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script type="text/javascript" src="/static/angular.min.js" th:src="@{/angular.min.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+	<script type="text/javascript">"src/main/resources/static/app/pnpStoreApp.js"</script>  
+    <script type="text/javascript" src="./static/app/app.module.js" th:src="@{/app/app.module.js}"></script>
+    <script type="text/javascript" src="./static/app/pnpStoreApp.js" th:src="@{/app/pnpStoreApp.js}"></script>
+    
+<script src="//cdn.jsdelivr.net/jquery/2.1.4/jquery.js"></script>
+<script src="//wzrd.in/standalone/blob-util@latest"></script>
+
+<script type="text/javascript">
+function openCartalog(evt, CartlogName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(CartlogName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+</script>
+<style>
+ table {
+ 		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+ }
+ 
+table tr:nth-child(even) {
+    background-color: #eee;
+	}
+	table tr:nth-child(odd) {
+    background-color:#fff;
+	}
+	
+	button {
+  	color: blue;
+  	}
+  	
+  	h3 {
+    text-decoration: underline;
+}
+
+ul li a:hover {background-color: red;}
+  	 li {float: left; width: 200px; height: 40px; background-color: black; opacity: .8;
+	line-height: 40px; text-align: center; font-size: 20px;}
+	
+	
+</style>
+
+</head>
+<body ng-app="pnpStoreApp"  ng-controller="pnpStoreAppController">
+
+<div>
+	 <img th:src="@{/images/logo.jpg}"  width="200" height="70" alt="logo" /> 
+	</div>
+
+
+	</div id="navbar">
+<ul class="navbar" style= "margin: 0px; padding: 0px; list-style: none; text-align: center;">
+	<div class="navbarli">
+	<li><a th:href="@{/logout}" method="get">logout</a></li>
+	
+	</div>
+<div class="panel-heading" style="margin-top:15px; background-color: #00cfcf;color: #E4F1FE; font-family:verdana; font-size:100%; text-align: right;">
+					<span th:utext="${userName}"></span>
+				</div>
+				
+	<div class="container">	
+		
+		
+		<div class="panel-group" style="margin-top:40px">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<span align="center"><b>Please choose your desired Management</b></span>
+				</div>
+				<div class="panel-body">
+				<!-- Vertical tab example -->				
+<div class="tab">
+  <button class="tablinks" onclick="openCartalog(event, '1')">All Deliveries</button>
+ <button class="tablinks" onclick="openCartalog(event, '2')">Available Deliveries
+  (<tr ng-repeat= "delivLength in delivLength"><td>{{delivLength[0]}}</td></tr>)
+ </button>
+</div>				
+			<div id="1" class="tabcontent">
+		<h3>All Deliveries</h3>	
+			<div align = "center" class="table-responsive">
+		<table class="table table-bordered" style="width: 600px;">
+			<tr>
+				 <th style="border: 1px solid black; background-color: #c13e46; color: white;">delivery ID</th>
+				<th style="border: 1px solid black; background-color: #c13e46; color: white;">order ID</th>
+				<th style="border: 1px solid black; background-color: #c13e46; color: white;">delivery date</th>
+				<th style="border: 1px solid black; background-color: #c13e46; color: white;">delivery time</th>
+				<th style="border: 1px solid black; background-color: #c13e46; color: white;">delivery status</th>
+				
+				</tr>
+           <tr ng-repeat="delivery in deliveries | filter: search">                   
+                   <td>{{delivery.delivery_id}}</td>
+                   <td>{{delivery.order_id}}</td>
+                   <td>{{delivery.delivery_date}}</td>
+                   <td>{{delivery.delivery_time}}</td>
+                   <td>{{delivery.delivery_status}}</td>
+                 
+			
+                		</tr>
+		</table>
+		</div>
+				</div>
+		
+			<div id="2" class="tabcontent">
+		<h3>Available Deliveries</h3>	
+			<div align = "center" class="table-responsive">
+		<table class="table table-bordered" style="width: 600px;">
+			<tr>
+				 <th style="border: 1px solid black; background-color: #c13e46; color: white;">delivery ID</th>
+				<th style="border: 1px solid black; background-color: #c13e46; color: white;">order ID</th>
+				<th style="border: 1px solid black; background-color: #c13e46; color: white;">delivery date</th>
+				<th style="border: 1px solid black; background-color: #c13e46; color: white;">delivery time</th>
+				<th style="border: 1px solid black; background-color: #c13e46; color: white;">delivery status</th>
+				
+				</tr>
+           <tr ng-repeat="pendingDelivery in pendingDeliveries | filter: search">                   
+                   <td>{{pendingDelivery.delivery_id}}</td>
+                   <td>{{pendingDelivery.order_id}}</td>
+                   <td>{{pendingDelivery.delivery_date}}</td>
+                   <td>{{pendingDelivery.delivery_time}}</td>
+                   <td>
+                   <select ng-model="status" ng-required="true">
+         					<option value="" selected"">---------</option>       					         					
+         					<option value="pending" >pending</option>
+         					<option value="on its way">on its way</option>
+         					<option value="delivered">delivered</option>      					
+         					</select>
+                   </td>
+                 <td><a ng-click="UpdateDelivery(pendingDelivery,status)" class="btn btn-success btn-sm btn-block">Update Status</a></td>
+			
+                		</tr>
+		</table>
+		</div>
+				</div>		
+				
+				
+				<div>		
+			<form th:action="@{/logout}" method="get">
+			<button class="btn btn-danger btn-block" name="logout"
+				type="Submit"  style="position: sticky;left: 0px; bottom: 0px;">Want to leave page? Click here to Logout</button>
+		</form>
+		</div>				
+			</div>			
+		</div>
+		
+	</div>
+</body>
+</html>

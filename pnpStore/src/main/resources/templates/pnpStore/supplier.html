@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Supplier page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/tab.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script type="text/javascript" src="/static/angular.min.js" th:src="@{/angular.min.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+	<script type="text/javascript">"src/main/resources/static/app/pnpStoreApp.js"</script>  
+    <script type="text/javascript" src="./static/app/app.module.js" th:src="@{/app/app.module.js}"></script>
+    <script type="text/javascript" src="./static/app/pnpStoreApp.js" th:src="@{/app/pnpStoreApp.js}"></script>
+    
+<script src="//cdn.jsdelivr.net/jquery/2.1.4/jquery.js"></script>
+<script src="//wzrd.in/standalone/blob-util@latest"></script>
+<script type="text/javascript">
+function openCartalog(evt, CartlogName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(CartlogName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+</script>
+</head>
+<body ng-app="pnpStoreApp"  ng-controller="pnpStoreAppController">
+<div>
+	 <img th:src="@{/images/logo.jpg}"  width="200" height="70" alt="logo" /> 
+	</div>
+<div class="panel-heading" style="margin-top:15px; background-color: #CF000F;color: #E4F1FE;">
+					<span th:utext="${userName}"></span>
+				</div>
+
+	<div class="container">	
+		
+		
+		<div class="panel-group" style="margin-top:40px">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<span align="center"><b>Please choose your desired Management</b></span>
+				</div>
+				<div class="panel-body">
+				<!-- Vertical tab example -->				
+<div class="tab">
+	<button class="tablinks" onclick="openCartalog(event, '1')">Stock orders</button>
+  <button class="tablinks" onclick="openCartalog(event, '2')">Product Out of stock
+  (<tr ng-repeat= "stockOrder in stockOrder"><td>{{stockOrder[0]}}</td></tr>)
+  </button>  
+</div>				
+			<div id="1" class="tabcontent">
+			<h3>Available products</h3>	
+			<div align = "center" class="table-responsive">
+			<table class="table table-bordered" style="width: 600px;">
+			
+			<tr>
+				 <th></th>
+				<th>Stock order ID</th>
+				<th>Stock product Name</th>
+				<th>Product group</th>
+				<th>Stock quantity</th>
+				<th>Stock order status</th>
+				</tr>
+           <tr ng-repeat="StockOrder in StockOrders">
+                   <td><span><img  src= "{{StockOrder.stock_product_img}}" width="200" height="200"></span></td>
+                   <td>{{StockOrder.stockOrder_id}}</td>                   
+                   <td>{{StockOrder.stock_product_name}}</td>
+                   <td>{{StockOrder.stock_product_group}}</td>
+                   <td>{{StockOrder.stock_product_quantity}}</td>
+                   <td>{{StockOrder.stockOrder_status}}</td>
+                   <td><a ng-click="DeleteStockOrder(StockOrder)" class="btn btn-danger btn-sm">Delete Stock order</a></td>
+                   </td>
+		
+			
+                		</tr>
+		</table>
+		</div>
+				</div>
+				
+			<div id="2" class="tabcontent">
+			<h3>Available products</h3>	
+			<div align = "center" class="table-responsive">
+			<table class="table table-bordered" style="width: 600px;">
+			
+			<tr>
+				 <th></th>
+				<th>Stock order ID</th>
+				<th>Stock product Name</th>
+				<th>Product group</th>
+				<th>Stock quantity</th>
+				<th>Stock order status</th>
+				</tr>
+           <tr ng-repeat="pendingstockOrder in pendingstockOrders">
+                   <td><span><img  src= "{{pendingstockOrder.stock_product_img}}" width="200" height="200"></span></td>
+                   <td>{{pendingstockOrder.stockOrder_id}}</td>                   
+                   <td>{{pendingstockOrder.stock_product_name}}</td>
+                   <td>{{pendingstockOrder.stock_product_group}}</td>
+                   <td>{{pendingstockOrder.stock_product_quantity}}</td>
+                   <td>{{pendingstockOrder.stockOrder_status}}</td>
+                  <td><a ng-click="SupplyStock(pendingstockOrder)" class="btn btn-success btn-sm">Supply product</a></td>
+                   </td>
+		
+			
+                		</tr>
+		</table>
+		</div>
+				</div>
+
+				
+				</div>
+				<div>		
+			<form th:action="@{/logout}" method="get">
+			<button class="btn btn-danger btn-block" name="logout"
+				type="Submit"  style="position: sticky;left: 0px; bottom: 0px;">Want to leave page? Click here to Logout</button>
+		</form>
+		</div>				
+			</div>			
+		</div>
+		
+	</div>				
+				
+				
+</body>
+</html>

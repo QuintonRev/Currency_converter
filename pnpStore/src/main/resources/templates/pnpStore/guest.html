@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Guest Customer page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/tab.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script type="text/javascript" src="/static/angular.min.js" th:src="@{/angular.min.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+	<script type="text/javascript">"src/main/resources/static/app/pnpStoreApp.js"</script>  
+    <script type="text/javascript" src="./static/app/app.module.js" th:src="@{/app/app.module.js}"></script>
+    <script type="text/javascript" src="./static/app/pnpStoreApp.js" th:src="@{/app/pnpStoreApp.js}"></script>
+
+
+<script type="text/javascript">
+function openCartalog(evt, CartlogName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(CartlogName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+</script>
+
+
+
+</head>
+
+<body ng-app="pnpStoreApp"  ng-controller="pnpStoreAppController">
+
+    			
+	<div>
+	 <img th:src="@{/images/logo.jpg}"  width="200" height="70" alt="logo" /> 
+	</div>
+	<div>
+	<form th:action="@{/login}" method="get" style="margin-top: 40px; margin-left: 0%">
+		<button class="btn btn-info" type="Submit">Already a User? Click here to login</button>
+	</form>
+	</div>	
+			  	
+	<div class="container">	
+	<div  style="margin-top:15px; background-color: #CF000F;color: #E4F1FE;">
+					<p>You are currently browsing as a guest</p>					
+				</div>				
+		
+		<div class="panel-group" style="margin-top:40px">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<span style="margin-left:400px; color: #F2F1EF"><b>Please browse your desired catagory below</b></span>
+				</div>
+				<div class="panel-body">
+
+<!-- Vertical tab example -->				
+<div class="tab">
+  <button class="tablinks" onclick="openCartalog(event, '1')">Fresh food</button>
+  <button class="tablinks" onclick="openCartalog(event, '2')">Food cupboard</button>
+  <button class="tablinks" onclick="openCartalog(event, '3')">Frozen food</button>
+  <button class="tablinks" onclick="openCartalog(event, '4')">Meals</button>
+  <button class="tablinks" onclick="openCartalog(event, '5')">Beverages</button>
+  <button class="tablinks" onclick="openCartalog(event, '6')">Health n Beauty</button>
+  <button class="tablinks" onclick="openCartalog(event, '7')">Home n Outdoor</button>
+  <button class="tablinks" onclick="openCartalog(event, '8')">Household</button>
+  <button class="tablinks" onclick="openCartalog(event, '9')">Baby</button>
+  <button class="tablinks" onclick="openCartalog(event, '10')">Electronics n Office</button>
+</div>
+
+
+
+			<!-- Fresh food -->
+			<div id="1" class="tabcontent">
+  			<input type="hidden" ng-model="FreshFood" ng-init="FreshFood ='Fresh food'"></input>
+  			<div align = "center" class="table-responsive">  			
+			<table class="table table-bordered" style="width: 600px;">
+							<tr><th></th><th>Name</th><th>Price</th><th>Group</th></tr>
+							<tr><td><img alt="grapes" src="/images/products/grapes.jpg" width="200" height="200"></td><td>Grapes</td><td>R30</td><td>Fresh food</td></tr>
+							<tr><td><img alt="musshrooms" src="/images/products/mushrooms.jpg" width="200" height="200"></td><td>mushrooms</td><td>R26.9</td><td>Fresh food</td></tr>
+							<tr><td><img alt="oranges" src="/images/products/oranges.jpg" width="200" height="200"></td><td>oranges</td><td>R80</td><td>Fresh food</td></tr>
+							<tr><td><img alt="pineaples" src="/images/products/pineaples.jpg" width="200" height="200"></td><td>pineaples</td><td>R12.5</td><td>Fresh food</td></tr>
+			</table>
+			</div>
+  			</div>
+  			
+  			<!-- Food cupboard -->
+			<div id="2" class="tabcontent">
+  			<input type="hidden" ng-model="Foodcupboard" ng-init="Foodcupboard ='Food cupboard'"></input>
+  			<div align = "center" class="table-responsive">  			
+			<table class="table table-bordered" style="width: 600px;">
+							<tr><th></th><th>Name</th><th>Price</th><th>Group</th></tr>
+							<tr><td><img alt="Fatties & Moonies spaghetti" src="/images/products/spaghetti.jpg" width="200" height="200"></td><td>Fatties & Moonies spaghetti</td><td>R10.9</td><td>food cupboard</td></tr>
+							<tr><td><img alt="Maggie 2 min. noodles" src="/images/products/Maggi-2-minute-chicken noodles.jpg" width="200" height="200"></td><td>Maggie 2 min. noodles</td><td>R5.9</td><td>food cupboard</td></tr>
+							<tr><td><img alt="Black Cat peanut butter" src="/images/products/peanut butter.jpg" width="200" height="200"></td><td>Black Cat peanut butter</td><td>R19.9</td><td>food cupboard</td></tr>
+							<tr><td><img alt="Fatties & Monies' macaroni" src="/images/products/macaroni.jpg" width="200" height="200"></td><td>Fatties & Monies' macaroni</td><td>R8.9</td><td>food cupboard</td></tr>
+							<tr><td><img alt="Lucky star pilchard" src="/images/products/lucky star pilchards.jpg" width="200" height="200"></td><td>Lucky star pilchard</td><td>R12.5</td><td>food cupboard</td></tr>
+							<tr><td><img alt="Bull Brand corned beef" src="/images/products/Bullbrand corned beef.jpg" width="200" height="200"></td><td>Bull Brand corned beef</td><td>R11.9</td><td>food cupboard</td></tr>
+			</table>
+			</div>
+  			</div>
+  			
+  			<!-- Frozen food -->
+			<div id="3" class="tabcontent">
+  			<input type="hidden" ng-model="Frozenfood" ng-init="Frozenfood ='Frozen food'"></input>
+  			<div align = "center" class="table-responsive">  			
+			<table class="table table-bordered" style="width: 600px;">
+							<tr><th></th><th>Name</th><th>Price</th><th>Group</th></tr>
+							<tr><td><img alt="McCain French fries" src="/images/products/McCain-French-Fries.jpg" width="200" height="200"></td><td>McCain French fries</td><td>R322.9</td><td>Frozen food</td></tr>
+							<tr><td><img alt="Rainbow mixed portions 1.8Kg" src="/images/products/rainbow-iqf-mixed-portions-18kg.jpg" width="200" height="200"></td><td>Rainbow mixed portions 1.8Kg</td><td>R64.9</td><td>Frozen food</td></tr>
+							<tr><td><img alt="DiGiorno frozen pizza" src="/images/products/DiGiorno pizza.jpg" width="200" height="200"></td><td>DiGiorno frozen pizza</td><td>R29.9</td><td>Frozen food</td></tr>
+							<tr><td><img alt="Birds-Eye burgers" src="/images/products/Birds-Eye burgers.jpg" width="200" height="200"></td><td>Birds-Eye burgers</td><td>R58.9</td><td>Frozen food</td></tr>
+							<tr><td><img alt="Birds-Eye fish fingers" src="/images/products/Birds-Eye fish fingers.jpg" width="200" height="200"></td><td>Birds-Eye fish fingers</td><td>R26.9</td><td>Frozen food</td></tr>
+							
+			</table>
+			</div>
+  			</div>
+  			
+  			<!-- Meals -->
+			<div id="4" class="tabcontent">
+  			<input type="hidden" ng-model="meals" ng-init="meals ='meals'"></input>
+  			<div align = "center" class="table-responsive">  			
+			<table class="table table-bordered" style="width: 600px;">
+							<tr><th></th><th>Name</th><th>Price</th><th>Group</th></tr>
+							<tr><td><img alt="meatball&veg" src="/images/products/meatball&veg.jpg" width="200" height="200"></td><td>meatballs and veggiesg</td><td>R34.99</td><td>meals</td></tr>
+							<tr><td><img alt="beaf meal" src="/images/products/beef meal.jpg" width="200" height="200"></td><td>beef meal</td><td>R30</td><td>meals</td></tr>
+							<tr><td><img alt="pizza&corn" src="/images/products/pizza&corn.jpg" width="200" height="200"></td><td>pizza and corn</td><td>R24.99</td><td>meals</td></tr>
+							
+			</table>
+			</div>
+  			</div>
+  			
+  			<!-- Beverages -->
+			<div id="5" class="tabcontent">
+  			<input type="hidden" ng-model="beverages" ng-init="beverages ='beverages'"></input>
+  			<div align = "center" class="table-responsive">  			
+			<table class="table table-bordered" style="width: 600px;">
+							<tr><th></th><th>Name</th><th>Price</th><th>Group</th></tr>
+							<tr><td><img alt="black label" src="/images/products/black label.jpg" width="200" height="200"></td><td>black label</td><td>R17</td><td>beverages</td></tr>
+							<tr><td><img alt="castle lager" src="/images/products/castle lager.jpg" width="200" height="200"></td><td>castle lager</td><td>R16</td><td>beverages</td></tr>
+							<tr><td><img alt="castle lite" src="/images/products/castle lite.jpg" width="200" height="200"></td><td>castle lite</td><td>R17</td><td>beverages</td></tr>
+							<tr><td><img alt="johnnie walker blue label" src="/images/products/johnnie walker blue label.jpg" width="200" height="200"></td><td>johnnie walker blue label</td><td>R1999</td><td>beverages</td></tr>
+				
+			</table>
+			</div>
+  			</div>
+  			
+  			
+  			<!-- Health n Beauty -->
+			<div id="6" class="tabcontent">
+  			<input type="hidden" ng-model="health" ng-init="health ='health'"></input>
+  			<div align = "center" class="table-responsive">  			
+			<table class="table table-bordered" style="width: 600px;">
+							<tr><th></th><th>Name</th><th>Price</th><th>Group</th></tr>
+							<tr><td><img alt="Basic Nutrition suppliments" src="/images/products/Basic Nutrition suppliments.jpg" width="200" height="200"></td><td>Basic Nutrition suppliments</td><td>R249.99</td><td>Health n Beauty</td></tr>
+							<tr><td><img alt="Alpha suppliments" src="/images/products/Alpha.jpg" width="200" height="200"></td><td>Alpha suppliments</td><td>R289.99</td><td>Health n Beauty</td></tr>
+							<tr><td><img alt="vaseline body lotion" src="/images/products/vaseline body lotion.jpg" width="200" height="200"></td><td>vaseline body lotion</td><td>R24.99</td><td>Health n Beauty</td></tr>
+							
+			</table>
+			</div>
+  			</div>
+  			
+  			<!-- Home n Outdoor -->
+			<div id="7" class="tabcontent">
+  			<input type="hidden" ng-model="outdoor" ng-init="outdoor ='outdoor'"></input>
+  			<div align = "center" class="table-responsive">  			
+			<table class="table table-bordered" style="width: 600px;">
+							<tr><th></th><th>Name</th><th>Price</th><th>Group</th></tr>
+							<tr><td><img alt="outdoor-bar" src="/images/products/outdoor-bar.jpg" width="200" height="200"></td><td>outdoor-bar</td><td>R2500</td><td>outdoor</td></tr>
+							<tr><td><img alt="wheelbarrow" src="/images/products/wheelbarrow.jpg" width="200" height="200"></td><td>wheelbarrow</td><td>R1550</td><td>outdoor</td></tr>
+							<tr><td><img alt="watering can" src="/images/products/watering can.jpg" width="200" height="200"></td><td>watering can</td><td>R90</td><td>outdoor</td></tr>
+							<tr><td><img alt="leaf blower" src="/images/products/leaf blower.jpg" width="200" height="200"></td><td>leaf blower</td><td>R366</td><td>outdoor</td></tr>
+							
+			</table>
+			</div>
+  			</div>
+  			
+  			<!-- Household -->
+			<div id="8" class="tabcontent">
+  			<input type="hidden" ng-model="household" ng-init="household ='household'"></input>
+  			<div align = "center" class="table-responsive">  			
+			<table class="table table-bordered" style="width: 600px;">
+							<tr><th></th><th>Name</th><th>Price</th><th>Group</th></tr>
+							<tr><td><img alt="duck toilet cleaner" src="/images/products/duck_toilet_cleaner.jpg" width="200" height="200"></td><td>duck toilet cleaner</td><td>R30</td><td>household</td></tr>
+							<tr><td><img alt="jik bleach" src="/images/products/jik bleach.jpg" width="200" height="200"></td><td>jik bleach</td><td>R18</td><td>household</td></tr>
+							<tr><td><img alt="omo washing powder" src="/images/products/omo washing powder.jpg" width="200" height="200"></td><td>Omo washing powder</td><td>R52.99</td><td>household</td></tr>
+							<tr><td><img alt="pledge lemon polish" src="/images/products/pledge lemon polish.jpg" width="200" height="200"></td><td>pledge lemon polish</td><td>R22.99</td><td>household</td></tr>
+					
+						
+			</table>
+			</div>
+  			</div>
+  			
+  			<!-- Baby -->
+			<div id="9" class="tabcontent">
+  			<input type="hidden" ng-model="babies" ng-init="babies ='babies'"></input>
+  			<div align = "center" class="table-responsive">  			
+			<table class="table table-bordered" style="width: 600px;">
+							<tr><th></th><th>Name</th><th>Price</th><th>Group</th></tr>
+							<tr><td><img alt="baby care cologne" src="/images/products/baby care cologne.jpg" width="200" height="200"></td><td>baby care cologne</td><td>R32.99</td><td>baby</td></tr>
+							<tr><td><img alt="purity" src="/images/products/purity.jpg" width="200" height="200"></td><td>purity</td><td>R11.99</td><td>baby</td></tr>
+					        <tr><td><img alt="huggies" src="/images/products/huggies.jpg" width="200" height="200"></td><td>huggies</td><td>R350</td><td>baby</td></tr>
+					
+			</table>
+			</div>
+  			</div>
+  			
+  			<!-- Electronics n Office -->
+			<div id="10" class="tabcontent">
+  			<input type="hidden" ng-model="electronics" ng-init="electronics ='electronics'"></input>
+  			<div align = "center" class="table-responsive">  			
+			<table class="table table-bordered" style="width: 600px;">
+							<tr><th></th><th>Name</th><th>Price</th><th>Group</th></tr>
+							<tr><td><img alt="bic pens" src="/images/products/bic pens.jpg" width="200" height="200"></td><td>Bic pens</td><td>R14.50</td><td>Electronics and office</td></tr>
+							<tr><td><img alt="Bic cluch pencils" src="/images/products/Bic cluch pencils.jpg" width="200" height="200"></td><td>Bic cluch pencils</td><td>R9.99</td><td>Electronics and office</td></tr>
+							<tr><td><img alt="BIC- highlighter" src="/images/products/BIC- highlighter.jpg" width="200" height="200"></td><td>BIC- highlighter</td><td>R16.99</td><td>Electronics and office</td></tr>
+							<tr><td><img alt="nikon D5300 camera" src="/images/products/nikon D5300 camera.jpg" width="200" height="200"></td><td>nikon D5300 camera</td><td>R3689</td><td>Electronics and office</td></tr>
+							<tr><td><img alt="samsung galaxy j7" src="/images/products/samsung galaxy j7.jpeg" width="200" height="200"></td><td>samsung galaxy j7 prime</td><td>R399</td><td>Electronics and office</td></tr>
+							
+			</table>
+		
+			</div>
+		</div>
+  			</div>
+  			<div style="background-color: #CF000F;color: #E4F1FE;">
+  		<p  align="center"><b>If you want to view all products please Register or if you have an account with us just login</b></p>
+  		</div>
+  			</div>
+  	
+  			</div>
+  		
+  			</div>
+  					<div><form th:action="@{/registration}" method="get" style="margin-top: 100px; margin-left: 1000px; ">
+		<button class="btn btn-danger " type="Submit">New User? Click here for Registration</button>
+	</form></div>		
+  			
+  			
+</body>
+</html>

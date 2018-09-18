@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>pnpStore Login</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body background="images/logo.jpg" style="background-repeat: no-repeat; background-size: auto">
+	
+	<div>
+		<form th:action="@{/registration}" method="get" >
+		<button class="btn btn-danger " type="Submit" style="position: absolute; top: 50px; left: 1000px;">New User? Click here for Registration</button>
+	</form>
+	</div>
+		
+	<div class="container" style="position: absolute; left:60px; top: 200px;">
+		
+		<form th:action="@{/login}" method="POST" class="form-signin">
+			<h3 class="form-signin-heading" style="color: #C0392B">Please insert your Login details</h3>
+			<br/>
+			 
+			<input type="text" id="email" name="email"  th:placeholder="Email"
+				class="form-control" /> <br/> 
+			<input type="password"  th:placeholder="Password"
+				id="password" name="password" class="form-control" /> <br /> 
+				
+			<div align="center" th:if="${param.error}">
+				<p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+			</div>
+			<button class="btn btn-md btn-info btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+		    <br/>
+		    <div>
+		    		<p style="font-size: 20; color: #FF1C19;">
+		    			<b>NOTE: </b>Ever registered on our website or app? If so, simply use your same login details here. Easy peasy!
+		    		</p>
+		    </div>
+		</form>
+	</div>
+	<form th:action="@{/}" method="get" >
+		<button class="btn btn-md btn-warning btn-block" type="Submit" style="position: absolute; top: 800px;">Want to browse our site? Simple click here</button>
+	</form>	
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>pnpStore registration</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+    <style>
+.break { page-break-before: always;color: #FABE58; }
+</style>
+   
+<body  background="images/logo.jpg" style="background-repeat: no-repeat; background-size: auto">
+<br/>
+	<form th:action="@{/}" method="get">
+	<!--	<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>-->
+	</form>	
+	<br/><br/><br/><br/>
+			
+        <div class="form-group"  style="color:#F22613; position: absolute; left: 410px; top: 180px;">
+			
+         <h3><b>Welcome to Pick n Pay Store Registration page</b></h3>
+        	
+					</div>
+       
+	<div class="container"  style="position: absolute; left: 90px; top: 240px;">
+            
+            <center>
+		<div class="row">
+                    
+                     <div class="col-md-4 col-md-offset-4">
+			<!--div class="col-md-6 col-md-offset-3"-->
+                            <div class="login-panel panel panel-default">
+                                <div class="panel-heading" style="background-color: #1F3A93">
+                                    <h3 class="panel-title"><span style="color:#E4F1FE; background-color: #1F3A93"><b>Enter your details here</b></span></h3>
+                    </div>
+                                
+                                 <div class="panel-body" style="background-color: #59ABE3">
+                                  
+				<form autocomplete="off" action="#" th:action="@{/registration}"
+					th:object="${user}" method="post" class="form-horizontal"
+					role="form">
+					<fieldset>
+                                            
+					<div class="form-group">
+						
+                                                    
+						<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+								class="validation-message"></label>
+						<input type="text" th:field="*{name}" placeholder="Name"
+								class="form-control" /> 
+						
+					
+                     </div>
+					<div class="form-group">
+						
+						<label	th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+								class="validation-message"></label>
+							<input type="text" th:field="*{lastName}"
+								placeholder="Last Name" class="form-control" /> 
+						
+					</div>
+					<div class="form-group">
+						
+							<input type="text" th:field="*{email}" placeholder="Email"
+								class="form-control" /> <label
+								th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+								class="validation-message"></label>
+						
+					</div>
+					<div class="form-group">
+						
+							<input type="password" th:field="*{password}"
+								placeholder="Password" class="form-control" /> <label
+								th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+								class="validation-message"></label>
+						
+					</div>
+
+					<div class="form-group">
+						
+							<button type="submit" class="btn btn-success">Register</button>
+						
+					</div>
+					
+					<span th:utext="${successMessage}"></span>
+					
+					 </fieldset>
+				</form>
+                                     
+						
+						<form th:action="@{/login}" method="get">
+		<button class="btn btn-md btn-warning btn-block" type="Submit">Login</button>
+	</form>	
+                                                </div>
+                                     
+                                 </div>
+                     </div>
+			</div>
+		</div>
+                
+            </center>
+
+<form th:action="@{/}" method="get" >
+		<button class="btn btn-danger btn-block" type="Submit" style="position: absolute; top: 750px;">Want to browse our site? Simple click here</button>
+	</form>	
+</body>
+</html>

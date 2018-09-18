@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Administrator page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/tab.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script type="text/javascript" src="/static/angular.min.js" th:src="@{/angular.min.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+	<script type="text/javascript">"src/main/resources/static/app/pnpStoreApp.js"</script>  
+    <script type="text/javascript" src="./static/app/app.module.js" th:src="@{/app/app.module.js}"></script>
+    <script type="text/javascript" src="./static/app/pnpStoreApp.js" th:src="@{/app/pnpStoreApp.js}"></script>
+    
+<script src="//cdn.jsdelivr.net/jquery/2.1.4/jquery.js"></script>
+<script src="//wzrd.in/standalone/blob-util@latest"></script>
+
+<!-- modal with a button -->
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+function openCartalog(evt, CartlogName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(CartlogName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+</script>
+
+
+
+</head>
+
+<body ng-app="pnpStoreApp"  ng-controller="pnpStoreAppController">
+
+    			
+	<div>
+	 <img th:src="@{/images/logo.jpg}"  width="200" height="70" alt="logo" /> 
+	</div>
+	<div align = "right">
+	<p>Search:<input type="text" ng-model="search" ></input></p>
+	</div>
+	<div class="panel-heading" style="margin-top:15px; background-color: #CF000F;color: #E4F1FE;">
+					<span th:utext="${userName}"></span>
+				</div>
+			  	
+	<div class="container">	
+		
+		
+		<div class="panel-group" style="margin-top:40px">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<span align="center"><b>Please choose your desired Management</b></span>
+				</div>
+				<div class="panel-body">
+				<!-- Vertical tab example -->				
+<div class="tab">
+  <button class="tablinks" onclick="openCartalog(event, '1')">Product Management</button>
+  <button class="tablinks" onclick="openCartalog(event, '2')">User Management</button>
+  <button class="tablinks" onclick="openCartalog(event, '3')">Order Management</button>
+  <button class="tablinks" onclick="openCartalog(event, '4')">Inventory Management</button>
+  <button class="tablinks" onclick="openCartalog(event, '5')">View Deliveries</button>
+  <button class="tablinks" onclick="openCartalog(event, '6')">Low Stock products
+  (<tr ng-repeat= "prodLength in prodLength"><td>{{prodLength[0]}}</td></tr>)
+  </button>
+</div>				
+			<div id="1" class="tabcontent">
+			<h3>Available products</h3>	
+			<div align = "center" class="table-responsive">
+			<a ng-click="addProd" class="btn btn-success btn-sm" style="margin-left:900px;" data-toggle="modal" data-target="#AddProducts">Add new product</a>
+		<table class="table table-bordered" style="width: 600px;">
+			<tr>
+				 <th></th>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Group</th>
+				
+				</tr>
+           <tr ng-repeat="product in products | filter: search">
+                   <td><span><img  src= "{{ product.product_img }}" width="200" height="200"></span></td>
+                   <td>{{product.product_name}}</td>
+                   <td> R:{{product.product_price}}</td>
+                   <td>{{product.product_group}}</td>
+                   <td><a ng-click="UpdatProduct(product)" class="btn btn-warning btn-sm">Update product</a><br/><br/>                   		
+                   		<a ng-click="DeleteProduct(product)" class="btn btn-danger btn-sm">Delete product</a><br/>
+                   </td>
+			
+                		</tr>
+		</table>
+		</div>
+				</div>
+				<div id="2" class="tabcontent">
+				<h3>Available Users</h3>
+				<div style="margin-left:900px;">
+				<form th:action="@{/pnpStore/registerAdmin}" method="get">
+				<button class="btn btn-success btn-sm" type="Submit">Add  Admin</button>
+				</form><br/>
+				<form th:action="@{/pnpStore/registerSupplier}" method="get">
+				<button class="btn btn-success btn-sm" type="Submit">Add Supplier</button>
+				</form><br/>
+				<form th:action="@{/pnpStore/registerDriver}" method="get">
+				<button class="btn btn-success btn-sm" type="Submit">Add  Driver</button>
+				</form>
+				</div>
+				<div align = "center" class="table-responsive">
+		<table class="table table-bordered" style="width: 600px;">
+			<tr>
+				 <th>User ID</th>
+				<th>User Name</th>
+				<th>User last name</th>
+				<th>Active</th>
+				
+				</tr>
+           <tr ng-repeat="user in users | filter: search">
+           			<td>{{user.id}}</td>
+                   <td> {{user.name}}</td>
+                   <td>{{user.lastName}}</td>
+                   <td>{{user.active}}</td>     
+                <td><a ng-click="deleteUser(user)" class="btn btn-danger btn-sm btn-block">Delete user</a><br/>
+                   </td>
+			
+                		</tr>
+		</table>
+		</div>	
+				</div>
+				
+				<div id="3" class="tabcontent">
+			<h3>Available Orders</h3>	
+			<div align = "center" class="table-responsive">
+		<table class="table table-bordered" style="width: 600px;">
+			<tr>
+				 <th>Order Number</th>
+				<th>User Number</th>
+				<th>User address</th>
+				<th>User ID</th>
+				<th>User Location</th>
+				
+				</tr>
+           <tr ng-repeat="order in orders">
+                   <td>{{order.order_id}}</td>
+                   <td> 0{{order.userNo}}</td>
+                   <td>{{order.user_address}}</td>
+                   <td>{{order.user_id}}</td>
+                   <td>{{order.user_location}}</td>
+                   <td><a ng-click="DeleteOrder(order)" class="btn btn-danger btn-sm btn-block">Cancel Order</a>
+                   </td>
+			</tr>
+		</table>
+		</div>
+				</div>
+							<div id="4" class="tabcontent">
+				<h3>Product inventories</h3>
+				<div align = "center" class="table-responsive">
+		<table class="table table-bordered" style="width: 600px;">
+			<tr>
+				 <th>Inventory ID</th>
+				<th>Inventory product name</th>
+				<th>Inventory product quantity</th>			
+				
+				</tr>
+           <tr ng-repeat="inventory in inventories | filter: search">
+           			<td>{{inventory.inventory_id}}</td>                   
+                   <td>{{inventory.product_name}}</td>
+                   <td> {{inventory.product_quantity}}</td>               
+               </tr>
+		</table>
+		</div>	
+				</div>
+
+				
+					<div id="5" class="tabcontent">
+			<h3>Available Deliveries</h3>	
+			<div align = "center" class="table-responsive">
+		<table class="table table-bordered" style="width: 600px;">
+			<tr>
+				 <th>delivery ID</th>
+				<th>order ID</th>
+				<th>delivery date</th>
+				<th>delivery time</th>
+				<th>delivery status</th>
+				
+				</tr>
+           <tr ng-repeat="delivery in deliveries | filter: search">                   
+                   <td>{{delivery.delivery_id}}</td>
+                   <td>{{delivery.order_id}}</td>
+                   <td>{{delivery.delivery_date}}</td>
+                   <td>{{delivery.delivery_time}}</td>
+                   <td>{{delivery.delivery_status}}</td>
+                 
+			
+                		</tr>
+		</table>
+		</div>
+				</div>
+				
+					<div id="6" class="tabcontent">					
+			<h3>Products low on stock </h3>	
+			<div align = "center" class="table-responsive">
+			<table class="table table-bordered" style="width: 600px;">
+			
+			<tr>
+				 <th></th>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Group</th>
+				<th>Stock quantity</th>
+				</tr>
+           <tr ng-repeat="stock in stocks">
+                   <td><span><img  src= "{{stock.product_img }}" width="200" height="200"></span></td>
+                   <td>{{stock.product_name}}</td>
+                   <td> R:{{stock.product_price}}</td>
+                   <td>{{stock.product_group}}</td>
+                  <td><input type = "number" name = "StockQuantity" ng-model="StockQuantity"></td>                          
+					<td><a ng-click="addStock(stock,StockQuantity)" class="btn btn-success btn-sm">Request Stock</a></td>
+                   </td>
+			
+                		</tr>
+		</table>
+		</div>
+				</div>
+				
+				</div>
+				<div>		
+			<form th:action="@{/logout}" method="get">
+			<button class="btn btn-danger btn-block" name="logout"
+				type="Submit"  style="position: sticky;left: 0px; bottom: 0px;">Want to leave page? Click here to Logout</button>
+		</form>
+		</div>				
+			</div>			
+		</div>
+		
+	</div>						
+	
+	
+								<!-- Adding product -->
+							<div class="container" style="margin-left: 43%">	 				
+							<div class="modal fade" id="AddProducts" role="dialog">
+    						<div class="modal-dialog">
+      						<div class="modal-content">
+        					<div class="modal-header">
+         					<button type="button" class="close" data-dismiss="modal">&times;</button>
+          					<h4 class="modal-title">Please provide product details</h4>
+        					</div>
+        					<div class="modal-body">
+        					<form name="addProduct">
+         					<h5><b></>Select product group:</b></h5>
+         					<select ng-model="group" ng-required="true">
+         					<option value="" selected"">---------</option>       					         					
+         					<option value="meals" >meals</option>
+         					<option value="outdoor">home and outdoor</option>
+         					<option value="beverages">beverages</option>
+         					<option value="fresh food">fresh food</option>
+         					<option value="health">health and Beauty</option>
+         					<option value="household">household</option>
+         					<option value="Food cupboard">Food cupboard</option>
+         					<option value="Frozen food">Frozen food</option>
+         					<option value="babies">baby</option>
+         					<option value="electronics and office">electronics and office</option>
+         					</select>
+         					<h5><b></>Product name:</b></h5>
+         					<input type="text" ng-model="productName"/>
+         					<h5><b></>Product image:</b></h5>
+                            <input type="file" id="img" accept="image/png/jpeg" >
+         					<h5><b></>Enter product price:</b></h5>
+         					<input type="number" ng-model="productPrice" placeholder="product price" ng-required="true"/>
+         					<h5><b></>Enter product quantity:</b></h5>
+         					<input type="number" ng-model="productQuantity" placeholder="product quantity" ng-required="true"/>  
+        					</div>
+        					<div class="modal-footer">
+          					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          					<a ng-click="AddProduct('group,productName,filePickerImage,productPrice,productQuantity')" class="btn btn-default" data-toggle="modal">Done</a>
+        					</form>
+        					</div></div></div></div></div>
+        					
+  								<!-- Update Product -->
+  							<div class="container" style="margin-left: 43%"> 
+  							<div class="modal fade" id="UpdateProducts" role="dialog">
+    						<div class="modal-dialog">
+      						<div class="modal-content">
+        					<div class="modal-header">
+         					<button type="button" class="close" data-dismiss="modal">&times;</button>
+          					<h4 class="modal-title">Updating product</h4>
+        					</div>
+        					<div class="modal-body">
+        					<div align = "center" class="table-responsive">
+        					<h5><b>Previous product information</b></h5>
+							<table class="table table-bordered" style="width: 500px;">
+							<tr>
+				 								<th></th>
+												<th>Name</th>
+												<th>Price</th>
+												<th>Group</th>
+				
+							</tr>
+          					 <tr ng-repeat="prod2Update in prod2Updates">
+                   			<td> <span><img  src="{{ prod2Update.product_img }}" width="100" height="100"> </span> </td>
+                   			<td>{{prod2Update.product_name}}</td>
+                   			<td> R:{{prod2Update.product_price}}</td>
+                   			<td>{{prod2Update.product_group}}</td>                   			                  		
+                   			</td>			
+                			</tr>
+							</table>
+							</div>
+        					<div align="center">
+        					<h5><b>Enter new product information</b></h5>
+        					<h5><b></>Select product group:</b></h5>
+         					<select ng-model="group" ng-required="true">
+         					<option value="" selected"">---------</option>       					         					
+         					<option value="meals" >meals</option>
+         					<option value="outdoor">home and outdoor</option>
+         					<option value="beverages">beverages</option>
+         					<option value="fresh food">fresh food</option>
+         					<option value="health">health and Beauty</option>
+         					<option value="household">household</option>
+         					<option value="Food cupboard">Food cupboard</option>
+         					<option value="Frozen food">Frozen food</option>
+         					<option value="babies">baby</option>
+         					<option value="electronics and office">electronics and office</option>
+         					</select>
+         					<h5><b></>Product name:</b></h5>
+         					<input type="text" ng-model="productName" ng-required="true"/>
+         					<h5><b></>Product image:</b></h5>
+                            <input type="file" id="img2" accept="image/png/jpeg" ng-required="true">
+         					<h5><b></>Enter product price:</b></h5>
+         					<input type="number" ng-model="productPrice" placeholder="product price" ng-required="true"/> 
+        					</div>
+        					</div><div class="modal-footer">
+          					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          					<a ng-click="UpdateProd('group,productName,productPrice')" class="btn btn-default" data-toggle="modal">Done</a>
+        					</form>
+        					</div></div></div></div>
+        					
+        					<!-- Adding driver -->
+							<div class="container" style="margin-left: 43%"> 			 				
+							<!-- Modal -->
+  							<div class="modal fade" id="AddDriver" role="dialog">
+    						<div class="modal-dialog">
+      						<div class="modal-content">
+        					<div class="modal-header">
+         					<button type="button" class="close" data-dismiss="modal">&times;</button>
+          					<h4 class="modal-title">Please provide driver details</h4>
+        					</div>
+        					<div class="modal-body">
+        					<form name="AddDrivr">         					
+         					<h5><b></>Driver name:</b></h5>
+         					<input type="text" ng-model="name"/>
+         					<h5><b></>Driver last name:</b></h5>
+         					<input type="text" ng-model="lastName"/>
+         					<h5><b></>Driver contact number:</b></h5>
+         					<input type="number" ng-model="DriverNumber" placeholder="must be 10 digits" ng-required="true"/>
+         					 
+        					</div>
+        					<div class="modal-footer">
+          					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          					<a ng-click="AddDriver('name,lastName,DriverNumber')" class="btn btn-default" data-toggle="modal">Done</a>
+        					</form>
+        					</div></div></div></div></div>
+        					
+        					<!-- Updating driver status -->
+							<div class="container" style="margin-left: 43%"> 			 				
+							<!-- Modal -->
+  							<div class="modal fade" id="UpdateStatus" role="dialog">
+    						<div class="modal-dialog">
+      						<div class="modal-content">
+        					<div class="modal-header">
+         					<button type="button" class="close" data-dismiss="modal">&times;</button>
+          					<h4 class="modal-title">Please driver status information</h4>
+        					</div>
+        					<div class="modal-body">
+        					<div align = "center" class="table-responsive">
+        					<h5><b>Previous product information</b></h5>
+							<table class="table table-bordered" style="width: 500px;">
+							<tr>
+				 								 <th>Driver ID</th>
+												<th>Driver name</th>
+												<th>Driver last name</th>
+												<th>Driver number</th>
+												<th>Driver status</th>
+												<th>Driver location</th>
+				
+							</tr>
+          					 <tr ng-repeat="drv2Update in drv2Updates">
+                   			
+                   				<td>{{drv2Update.ID}}</td>
+                   				<td>{{drv2Update.driver_name}}</td>
+                   				<td>{{drv2Update.driver_lastName}}</td> 
+                   				<td>0{{drv2Update.driver_no}}</td> 
+                   				<td>{{drv2Update.d_status}}</td> 
+                   				<td>{{drv2Update.driver_location}}</td>                  			                  		
+                   						
+                			</tr>
+							</table>
+							</div>
+        					
+        					<form name="UpdateDrivrStatus">         					
+         					<h5><b></>Select Driver Status:</b></h5>
+         					<select ng-model="status" ng-required="true">
+         					<option value="" selected"">---------</option>       					         					
+         					<option value="Off duty" >Off duty</option>         					
+         					<option value="On duty">On duty</option>
+         					<option value="Done">Done with delivery</option>
+         					</select>
+         					 <h5><b></>Location:</b></h5>
+         					<select ng-model="location">
+         					<option value="" selected"">---------</option>
+         					<option value="Not available" >Not available</option>        					         					         					
+         					<option value="Pretoria">Pretoria</option>
+         					<option value="Johannesburg">Johannesburg CBD</option> 
+         					<option value="Midrand">Midrand</option> 
+         					<option value="Soweto">Soweto</option>
+         					<option value="Sandton">Sandton</option>
+         					<option value="Alexandria">Alexandria</option>       					
+         					</select>
+         					<h5><b></>Driver name:</b></h5>
+         					<input type="text" ng-model="name"/>
+         					<h5><b></>Driver last name:</b></h5>
+         					<input type="text" ng-model="lastName"/>
+         					<h5><b></>Driver contact number:</b></h5>
+         					<input type="number" ng-model="DriverNumber" placeholder="must be 10 digits" ng-required="true"/>
+         					
+        					</div>
+        					<div class="modal-footer">
+          					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          					<a ng-click="UpdateDriverStatus('status,location,name,lastName,DriverNumber')" class="btn btn-default" data-toggle="modal">Done</a>
+        					</form>
+        					</div></div></div></div></div>
+        					
+        					
+        					
+		
+		
+		
+</body>
+</html>
