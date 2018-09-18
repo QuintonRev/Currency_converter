@@ -1,0 +1,18 @@
+
+nsquid:CommentedOutCodeLiney"<This block of commented-out lines of code should be removed.(ß˜úÖÿÿÿÿÿ8ôÛ¹®Ö,
+dsquid:S1854‹"@Remove this useless assignment to local variable "currencyList".(áÌ¬îúÿÿÿÿ8ŠÈ´®Ö,
+‚squid:S1149o"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(Ôô¡Óüÿÿÿÿ8çâÅ­Ö,
+^squid:S1854k"@Remove this useless assignment to local variable "responseCode".(Û·Í8çâÅ­Ö,
+Osquid:S1481'"1Remove this unused "responseCode" local variable.(Û·Í8çâÅ­Ö,
+[
+squid:S106R"9Replace this use of System.out or System.err by a logger.(…°ƒ§øÿÿÿÿ8’±¦®Ö,
+Osquid:S1481k"1Remove this unused "responseCode" local variable.(Û·Í8çâÅ­Ö,
+Gsquid:S1481=")Remove this unused "line" local variable.(’±¹ÿ8çâÅ­Ö,
+csquid:S1854a"@Remove this useless assignment to local variable "targetAmount".(Öó³Öúÿÿÿÿ8çâÅ­Ö,
+W
+squid:S106"9Replace this use of System.out or System.err by a logger.(Úšó•8Õý®Ö,
+^squid:S1854'"@Remove this useless assignment to local variable "responseCode".(Û·Í8çâÅ­Ö,
+Vsquid:S1854="8Remove this useless assignment to local variable "line".(’±¹ÿ8çâÅ­Ö,
+Tsquid:S1481"1Remove this unused "currencyList" local variable.(áÌ¬îúÿÿÿÿ8çâÅ­Ö,
+‚squid:S1149+"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(Ôô¡Óüÿÿÿÿ8çâÅ­Ö,
+csquid:S1854"@Remove this useless assignment to local variable "currencyList".(áÌ¬îúÿÿÿÿ8çâÅ­Ö,
